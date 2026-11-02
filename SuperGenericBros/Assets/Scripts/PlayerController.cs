@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
         playerSprite = GetComponent<SpriteRenderer>();
         if (RB == null)
             Debug.LogError("Rigidbody2D saknas");
+        if (GroundCheck == null)
+            Debug.LogError("Groundcheck saknas");
     }
     void Update()
     {
