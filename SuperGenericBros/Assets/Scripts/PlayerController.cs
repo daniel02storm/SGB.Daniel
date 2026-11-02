@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public LayerMask GroundLayer;
     private float moveInput;
     private bool isGrounded;
+    private bool canDoubleJump;
     private SpriteRenderer playerSprite;
     private Rigidbody2D RB;
     void Awake()
@@ -45,7 +46,16 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetButtonDown("Jump"))
         {
-
+            if (isGrounded)
+            {
+                RB.linearVelocity = new Vector2(RB.linearVelocity.x, JumpForce);
+                canDoubleJump = true;
+            }
+            else if (canDoubleJump)
+            {
+                RB.linearVelocity = new Vector2(RB.linearVelocity.x, JumpForce);
+                canDoubleJump = false;
+            }
         }
     }
 }
