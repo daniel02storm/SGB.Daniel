@@ -18,8 +18,22 @@ public class GameManager : MonoBehaviour
         if (GameState != State.Playing && Input.GetKeyDown(KeyCode.R))
             Restart();
     }
+    public void Win()
+    {
+        if (GameState != State.Playing) return;
+        GameState = State.Won;
+        StatusText.text = "Victory!";
+        Debug.Log("Win");
+    }
     public void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    public void Lose()
+    {
+        if (GameState != State.Playing) return;
+        GameState = State.Lost;
+        StatusText.text = "Game over!";
+        Debug.Log("Defeat");
     }
 }
