@@ -25,6 +25,9 @@ public class Enemy : Danger
             WalkPast();
         else
             RunAtVictim();
+
+        if (transform.position.y < -20f)
+            Destroy(gameObject);
     }
 
     void WalkPast()
