@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEditor.Build.Content;
 using UnityEngine;
 
@@ -12,6 +14,7 @@ public class PlayerController : MonoBehaviour
     private bool canDoubleJump;
     private SpriteRenderer playerSprite;
     private Rigidbody2D RB;
+    public event Action Died;
     void Awake()
     {
         RB = GetComponent<Rigidbody2D>();
@@ -59,5 +62,22 @@ public class PlayerController : MonoBehaviour
                 canDoubleJump = false;
             }
         }
+    }
+    public void Die()
+    {
+        RB.linearVelocity = Vector2.zero;
+        RB.simulated = false;
+        StartCoroutine(Blink());
+    }
+    private IEnumerator Blink()
+    {
+        for (int blinks = 0; blinks < 5; blinks++)
+        {
+            playerSprite.enabled = false;
+            yield return new WaitForSeconds(0.1f);
+            playerSprite.enabled = true;
+            yield return new WaitForSeconds(0.1f);
+        }
+        Died?.Invoke();
     }
 }
