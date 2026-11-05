@@ -17,7 +17,7 @@ public class Enemy : Danger
     void Update()
     {
         float distance = Mathf.Abs(Victim.position.x - transform.position.x);
-        if (distance < 2f)
+        if (distance < 3f)
             mood = EnemyState.Angry;
         else
             mood = EnemyState.Chill;
