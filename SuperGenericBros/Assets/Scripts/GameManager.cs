@@ -14,6 +14,12 @@ public class GameManager : MonoBehaviour
     {
         Instance = this;
     }
+    void Start()
+    {
+        Player.Died += Lose;
+        StatusText.text = "Onwards!";
+        RestartButton.SetActive(false);
+    }
     void Update()
     {
         if (GameState != State.Playing && Input.GetKeyDown(KeyCode.R))
