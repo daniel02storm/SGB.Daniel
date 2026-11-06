@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         Player.Died += Lose;
-        StatusText.text = "Onwards!";
+        StatusText.text = "Find the coin!";
         RestartButton.SetActive(false);
     }
     void Update()
@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     {
         if (GameState != State.Playing) return;
         GameState = State.Won;
-        StatusText.text = "Victory!";
+        StatusText.text = "We're rich!";
         Debug.Log("Win");
         RestartButton.SetActive(true);
     }

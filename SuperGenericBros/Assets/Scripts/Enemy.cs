@@ -8,10 +8,12 @@ public class Enemy : Danger
     private EnemyState mood = EnemyState.Chill;
     private float startPlace;
     private int walkPath = 1;
+    private Rigidbody2D RB;
 
     void Start()
     {
         startPlace = transform.position.x;
+        RB = GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -38,15 +40,15 @@ public class Enemy : Danger
         if (transform.position.x < startPlace - 2f)
             walkPath = 1;
 
-        transform.Translate(walkPath * ZoomSpeed * Time.deltaTime, 0, 0);
+        RB.linearVelocity = new Vector2(walkPath * ZoomSpeed, RB.linearVelocity.y);
     }
 
     void RunAtVictim()
     {
         if (Victim.position.x > transform.position.x)
-            transform.Translate(ZoomSpeed * Time.deltaTime, 0, 0);
+            RB.linearVelocity = new Vector2(ZoomSpeed, RB.linearVelocity.y);
         else
-            transform.Translate(-ZoomSpeed * Time.deltaTime, 0, 0);
+            RB.linearVelocity = new Vector2(-ZoomSpeed, RB.linearVelocity.y);
     }
     public override void OnPlayerHit(PlayerController player)
     {
