@@ -53,17 +53,20 @@ public class PlayerController : MonoBehaviour
             if (isGrounded)
             {
                 RB.linearVelocity = new Vector2(RB.linearVelocity.x, JumpForce);
+                AudioManager.Instance.JumpPlay();
                 canDoubleJump = true;
             }
             else if (canDoubleJump)
             {
                 RB.linearVelocity = new Vector2(RB.linearVelocity.x, JumpForce);
+                AudioManager.Instance.JumpPlay();
                 canDoubleJump = false;
             }
         }
     }
     public void Die()
     {
+        AudioManager.Instance.DeathPlay();
         RB.linearVelocity = Vector2.zero;
         RB.simulated = false;
         StartCoroutine(Blink());

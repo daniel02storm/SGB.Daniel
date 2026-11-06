@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     {
         if (GameState != State.Playing) return;
         GameState = State.Won;
+        AudioManager.Instance.WinPlay();
         StatusText.text = "We're rich!";
         Debug.Log("Win");
         RestartButton.SetActive(true);
