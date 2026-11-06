@@ -4,13 +4,14 @@ public class MovingPlatform : MonoBehaviour
 {
     int direction = 1;
     float startPlace;
+    float move;
 
     void Start()
     {
         startPlace = transform.position.x;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (transform.position.x > startPlace + 6)
             direction = -1;
@@ -18,6 +19,12 @@ public class MovingPlatform : MonoBehaviour
         if (transform.position.x < startPlace - 6)
             direction = 1;
 
-        transform.Translate(direction * 4f * Time.deltaTime, 0, 0);
+        move = direction * 3f * Time.fixedDeltaTime;
+        transform.Translate(move, 0, 0);
+    }
+    void OnCollisionStay2D(Collision2D other)
+    {
+        if (other.gameObject.GetComponent<PlayerController>() != null)
+            other.transform.Translate(move, 0, 0);
     }
 }
