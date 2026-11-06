@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     public State GameState = State.Playing;
     public PlayerController Player;
     public GameObject RestartButton;
+    public GameObject MenuButton;
+    public string StartMenu;
     void Awake()
     {
         Instance = this;
@@ -19,6 +21,7 @@ public class GameManager : MonoBehaviour
         Player.Died += Lose;
         StatusText.text = "Find the coin!";
         RestartButton.SetActive(false);
+        MenuButton.SetActive(false);
     }
     void Update()
     {
@@ -32,6 +35,7 @@ public class GameManager : MonoBehaviour
         StatusText.text = "We're rich!";
         Debug.Log("Win");
         RestartButton.SetActive(true);
+        MenuButton.SetActive(true);
     }
     public void Restart()
     {
@@ -44,5 +48,10 @@ public class GameManager : MonoBehaviour
         StatusText.text = "Game over!";
         Debug.Log("Defeat");
         RestartButton.SetActive(true);
+        MenuButton.SetActive(true);
+    }
+    public void GoMenu()
+    {
+        SceneManager.LoadScene(StartMenu);
     }
 }
